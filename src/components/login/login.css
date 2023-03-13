@@ -1,0 +1,66 @@
+.loginPage {
+  max-width: 500px;
+  min-height: 85vh;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+}
+
+.loginForm {
+  width: 100%;
+  height: 70vh;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  border-radius: 25px;
+  /* background-color: rgb(138, 138, 255); */
+  /* box-shadow: -6px -6px 0px 0px rgba(0, 0, 0, 0.3); */
+  box-shadow: inset 5px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.loginForm form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.loginForm form input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #333;
+}
+
+.loginForm form input:focus {
+  outline: none;
+}
+
+.loginForm form button {
+  width: 25%;
+  border: none;
+  background-color: #4169e1;
+  color: #e5e4e4;
+  padding: 10px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.loginForm form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+.login-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot {
+  font-size: 13px;
+}

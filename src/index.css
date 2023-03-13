@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.error {
+  color: rgb(255, 174, 0);
+  margin-bottom: 0;
+}

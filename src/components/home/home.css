@@ -1,0 +1,22 @@
+.home-wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: 30px;
+  max-width: 80vw;
+  margin: 0 auto;
+}
+
+.home-wrapper form {
+  padding: 20px;
+  /* border-radius: 50px; */
+}
+
+/* .home-wrapper input,
+textarea {
+  background-color: #9cf;
+} */
+
+.home-heading {
+  text-align: center;
+  margin-bottom: 25px;
+}
