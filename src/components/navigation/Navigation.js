@@ -10,18 +10,18 @@ const Navigation = () => {
   // const token = localStorage.getItem("token");
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/home");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate("/home");
+  //   }
+  // }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userLoggedIn");
     toast.warn("Logged out successfully!");
-    navigate("/login");
+    // navigate("/login");
   };
 
   return (

@@ -17,8 +17,6 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/home");
-    } else {
-      navigate("/login");
     }
   }, []);
 
