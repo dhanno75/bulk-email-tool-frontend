@@ -28,7 +28,7 @@ const Navigation = () => {
     <div>
       <Navbar expand="lg" className="navi">
         <Container fluid>
-          <Link to="/home" className="nav-link home-link">
+          <Link to="#" className="nav-link home-link">
             <img src={Logo} alt="" className="navi-logo" />
           </Link>
           <Navbar.Toggle aria-controls="navbarScroll" />
@@ -38,13 +38,22 @@ const Navigation = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Link to="/home" className="nav-link">
-                Home
-              </Link>
-              <Link to="/stats" className="nav-link">
-                Stats
-              </Link>
-              <NavDropdown title="Link" id="navbarScrollingDropdown">
+              {isLoggedIn ? (
+                <Link to="/home" className="nav-link">
+                  Home
+                </Link>
+              ) : (
+                ""
+              )}
+
+              {isLoggedIn ? (
+                <Link to="/stats" className="nav-link">
+                  Stats
+                </Link>
+              ) : (
+                ""
+              )}
+              {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
                   Another action
@@ -53,7 +62,7 @@ const Navigation = () => {
                 <NavDropdown.Item href="#action5">
                   Something else here
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
             <Nav
               className=" my-2 my-lg-0"

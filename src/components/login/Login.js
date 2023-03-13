@@ -9,8 +9,8 @@ import "./login.css";
 import { useNavigate, Link } from "react-router-dom";
 
 const initialValues = {
-  email: "p-dhananjay@outlook.com",
-  password: "7410852.",
+  email: "",
+  password: "",
 };
 
 const Login = () => {

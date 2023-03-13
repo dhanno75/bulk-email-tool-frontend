@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { emailData } from "../../redux/features/EmailSlice";
 import BarChart from "../../utils/BarChart";
-import { UserData } from "../../utils/Data";
 import "./statistics.css";
 
 const Statistics = () => {
@@ -30,7 +29,6 @@ const Statistics = () => {
     };
   });
 
-  // let length = emails.length;
   const [userData, setUserData] = useState({
     labels: md.map((el) => el.month),
     datasets: [
@@ -64,10 +62,6 @@ const Statistics = () => {
   useEffect(() => {
     dispatch(emailData());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   userData
-  // })
 
   return (
     <div>
