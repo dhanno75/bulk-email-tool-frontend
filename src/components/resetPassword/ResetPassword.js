@@ -36,7 +36,7 @@ const ResetPassword = () => {
           })
           .then((data) => {
             localStorage.setItem("token", data.token);
-            navigate("/home");
+            navigate("/");
             toast.success("Password updated successfully!");
           })
           .catch((err) => {
