@@ -37,7 +37,9 @@ const ResetPassword = () => {
           .then((data) => {
             localStorage.setItem("token", data.token);
             navigate("/");
-            toast.success("Password updated successfully!");
+            toast.success(
+              "Password updated successfully. Please login using your new password!"
+            );
           })
           .catch((err) => {
             toast.warn("Token is invalid or expired");
