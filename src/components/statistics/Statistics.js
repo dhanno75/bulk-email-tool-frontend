@@ -2,11 +2,34 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { emailData } from "../../redux/features/EmailSlice";
 import BarChart from "../../utils/BarChart";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js/auto";
 import "./statistics.css";
+import Spinner from "react-bootstrap/Spinner";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const Statistics = () => {
   const dispatch = useDispatch();
   const emails = useSelector((state) => state.emails.emails);
+  const [chartData, setChartData] = useState({
+    datasets: [],
+  });
+  const [chartOptions, setChartOptions] = useState({});
   const months = [
     "January",
     "February",
@@ -28,6 +51,32 @@ const Statistics = () => {
       emailsPerMonth: el.epm,
     };
   });
+
+  useEffect(() => {
+    setChartData({
+      labels: md.map((el) => el.month),
+      datasets: [
+        {
+          label: "Emails sent per month",
+          data: md.map((el) => el.emailsPerMonth),
+          borderColor: "rgb(53, 162, 235)",
+          backgroundColor: "rgba(53, 162, 235, 0.4)",
+        },
+      ],
+    });
+    setChartOptions({
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Emails sent per month",
+        },
+      },
+    });
+  }, []);
 
   const [userData, setUserData] = useState({
     labels: md.map((el) => el.month),
@@ -69,7 +118,11 @@ const Statistics = () => {
         <div className="stats-wrapper ">
           <h1 className="stats-heading">Your emails statistics</h1>
           <div className="stats-chart">
-            <BarChart chartData={userData} />
+            {emails ? (
+              <BarChart chartData={userData} />
+            ) : (
+              <Spinner animation="grow" variant="dark" />
+            )}
           </div>
         </div>
       </div>

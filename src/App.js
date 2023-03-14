@@ -10,23 +10,39 @@ import "react-toastify/dist/ReactToastify.css";
 import Signup from "./components/signup/Signup";
 import { useEffect } from "react";
 import Statistics from "./components/statistics/Statistics";
+import ProtectedRoute from "./ProtectedRoutes";
 
 function App() {
-  const navigate = useNavigate();
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate("/home");
-    }
-  }, []);
+  // const navigate = useNavigate();
+  // const isLoggedIn = localStorage.getItem("isLoggedIn");
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     navigate("/home");
+  //   }
+  // }, []);
 
   return (
     <div className="App">
       <Navigation />
       <ToastContainer />
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/stats" element={<Statistics />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/stats"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Statistics />{" "}
+            </ProtectedRoute>
+          }
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />

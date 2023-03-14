@@ -12,7 +12,6 @@ export const emailData = createAsyncThunk("emails/emailData", async () => {
       },
     });
     let emailDetails = await res.json();
-    console.log(emailDetails);
     return emailDetails;
   } catch (err) {
     console.log(err);
