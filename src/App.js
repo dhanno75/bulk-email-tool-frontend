@@ -11,6 +11,7 @@ import Signup from "./components/signup/Signup";
 import { useEffect } from "react";
 import Statistics from "./components/statistics/Statistics";
 import ProtectedRoute from "./ProtectedRoutes";
+import About from "./components/about/About";
 
 function App() {
   // const navigate = useNavigate();
@@ -26,6 +27,7 @@ function App() {
       <Navigation />
       <ToastContainer />
       <Routes>
+        <Route path="/" element={<About />} />
         <Route
           path="/home"
           element={

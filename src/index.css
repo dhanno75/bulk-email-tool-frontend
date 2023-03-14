@@ -3,9 +3,10 @@ body {
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #b481be;
 }
 
 .error {
-  color: rgb(255, 174, 0);
+  color: rgb(233, 209, 235);
   margin-bottom: 0;
 }

@@ -1,3 +1,4 @@
 .chartLine {
   min-height: 50vh;
+  object-fit: cover;
 }

@@ -38,6 +38,9 @@ const Navigation = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
+              <Link to="/" className="nav-link">
+                About
+              </Link>
               {isLoggedIn ? (
                 <Link to="/home" className="nav-link">
                   Home
@@ -53,6 +56,7 @@ const Navigation = () => {
               ) : (
                 ""
               )}
+
               {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
