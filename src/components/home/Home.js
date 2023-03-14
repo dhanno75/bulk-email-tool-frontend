@@ -57,8 +57,6 @@ const Home = () => {
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       data = XLSX.utils.sheet_to_json(worksheet).map((el) => el.email);
-      console.log(data);
-      // setFormValues({ ...formValues, to: data });
     } else {
       alert("Something went wrong. Please try again!");
     }
@@ -82,7 +80,7 @@ const Home = () => {
         toast.success("Emails sent successfully to the recipients!");
         navigate("/stats");
       })
-      .catch((err) => {
+      .catch(() => {
         toast.warn("Something went wrong. Please try again later");
       });
   };

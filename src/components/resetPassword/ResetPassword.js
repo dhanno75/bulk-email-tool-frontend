@@ -11,10 +11,9 @@ const initialValues = {
   password: "",
 };
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const navigate = useNavigate();
   const { token } = useParams();
-  console.log(token);
 
   const { values, handleBlur, handleSubmit, handleChange, errors, touched } =
     useFormik({
@@ -71,4 +70,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

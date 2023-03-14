@@ -21,7 +21,7 @@ const Navigation = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userLoggedIn");
     toast.warn("Logged out successfully!");
-    navigate("/login");
+    navigate("/");
   };
 
   return (
