@@ -27,6 +27,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.6",
+    "recharts": "^2.4.3",
     "victory": "^36.6.8",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5",

@@ -11,6 +11,7 @@ import Signup from "./components/signup/Signup";
 import Statistics from "./components/statistics/Statistics";
 import ProtectedRoute from "./ProtectedRoutes";
 import About from "./components/about/About";
+import Statistic from "./components/statistics/Statistic";
 
 function App() {
   return (
@@ -27,12 +28,21 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/stats"
           element={
             <ProtectedRoute>
               {" "}
               <Statistics />{" "}
+            </ProtectedRoute>
+          }
+        /> */}
+        <Route
+          path="/stats"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Statistic />{" "}
             </ProtectedRoute>
           }
         />

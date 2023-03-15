@@ -47,6 +47,7 @@ const Statistics = () => {
       emailsPerMonth: el.epm,
     };
   });
+  console.log(md);
 
   const [userData, setUserData] = useState({
     labels: md.map((el) => el.month),
@@ -88,11 +89,7 @@ const Statistics = () => {
         <div className="stats-wrapper ">
           <h1 className="stats-heading">Your emails statistics</h1>
           <div className="stats-chart">
-            {emails ? (
-              <BarChart chartData={userData} />
-            ) : (
-              <Spinner animation="grow" variant="dark" />
-            )}
+            <BarChart chartData={userData} />
           </div>
         </div>
       </div>
