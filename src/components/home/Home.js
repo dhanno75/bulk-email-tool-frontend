@@ -5,6 +5,8 @@ import * as XLSX from "xlsx";
 import { API } from "../../globals";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css";
 
 const initialValues = {
   from: "",
@@ -16,7 +18,7 @@ const initialValues = {
 const Home = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
-  // const [excelData, setExcelData] = useState(null);
+  const { quill, quillRef } = useQuill();
   const [formValues, setFormValues] = useState(initialValues);
   const navigate = useNavigate();
 

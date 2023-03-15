@@ -11,7 +11,7 @@ import Signup from "./components/signup/Signup";
 import Statistics from "./components/statistics/Statistics";
 import ProtectedRoute from "./ProtectedRoutes";
 import About from "./components/about/About";
-import Statistic from "./components/statistics/Statistic";
+import Lome from "./components/home/Lome";
 
 function App() {
   return (
@@ -24,16 +24,15 @@ function App() {
           path="/home"
           element={
             <ProtectedRoute>
-              <Home />
+              <Lome />
             </ProtectedRoute>
           }
         />
         {/* <Route
-          path="/stats"
+          path="/home"
           element={
             <ProtectedRoute>
-              {" "}
-              <Statistics />{" "}
+              <Home />
             </ProtectedRoute>
           }
         /> */}
@@ -42,7 +41,7 @@ function App() {
           element={
             <ProtectedRoute>
               {" "}
-              <Statistic />{" "}
+              <Statistics />{" "}
             </ProtectedRoute>
           }
         />

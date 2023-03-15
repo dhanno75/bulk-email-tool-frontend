@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { emailData } from "../../redux/features/EmailSlice";
-import BarChart from "../../utils/BarChart";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js/auto";
 import "./statistics.css";
-import Spinner from "react-bootstrap/Spinner";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+import {
+  CartesianGrid,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  Legend,
   Tooltip,
-  Legend
-);
+  XAxis,
+  YAxis,
+} from "recharts";
 
-const Statistics = () => {
+const Statistic = () => {
   const dispatch = useDispatch();
   const emails = useSelector((state) => state.emails.emails);
   const months = [
@@ -41,42 +31,11 @@ const Statistics = () => {
     "December",
   ];
 
-  let md = emails.map((el) => {
+  let data = emails.map((el) => {
     return {
       month: months[el._id - 1],
       emailsPerMonth: el.epm,
     };
-  });
-  console.log(md);
-
-  const [userData, setUserData] = useState({
-    labels: md.map((el) => el.month),
-    datasets: [
-      {
-        label: "Emails sent per month",
-        data: md.map((el) => el.emailsPerMonth),
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(75, 192, 192)",
-          "rgb(255, 159, 64)",
-          "rgb(255, 205, 86)",
-          "rgb(54, 162, 235)",
-          "rgb(153, 102, 255)",
-          "rgb(201, 203, 207)",
-        ],
-        borderColor: [
-          "rgb(255, 99, 132)",
-          "rgb(75, 192, 192)",
-          "rgb(255, 159, 64)",
-          "rgb(255, 205, 86)",
-          "rgb(54, 162, 235)",
-          "rgb(153, 102, 255)",
-          "rgb(201, 203, 207)",
-        ],
-        borderWidth: 1,
-        lineTension: 0.3,
-      },
-    ],
   });
 
   useEffect(() => {
@@ -89,7 +48,22 @@ const Statistics = () => {
         <div className="stats-wrapper ">
           <h1 className="stats-heading">Your emails statistics</h1>
           <div className="stats-chart">
-            <BarChart chartData={userData} />
+            <ResponsiveContainer width={950} height={500}>
+              <AreaChart data={data}>
+                <Area
+                  type="monotone"
+                  dataKey="emailsPerMonth"
+                  stroke="#7872E8"
+                  fill="#7872E8"
+                  strokeWidth={1}
+                />
+                <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
@@ -97,14 +71,4 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
-
-// backgroundColor: [
-//   "rgba(255, 99, 132, 0.2)",
-//   "rgba(75, 192, 192, 0.2)",
-//   "rgba(255, 159, 64, 0.2)",
-//   "rgba(255, 205, 86, 0.2)",
-//   "rgba(54, 162, 235, 0.2)",
-//   "rgba(153, 102, 255, 0.2)",
-//   "rgba(201, 203, 207, 0.2)",
-// ],
+export default Statistic;

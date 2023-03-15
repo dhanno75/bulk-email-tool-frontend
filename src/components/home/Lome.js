@@ -5,8 +5,8 @@ import * as XLSX from "xlsx";
 import { API } from "../../globals";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { emailSenderSchema } from "../../schemas";
-import { useFormik } from "formik";
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css";
 
 const initialValues = {
   from: "",
@@ -18,7 +18,7 @@ const initialValues = {
 const Lome = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
-  // const [excelData, setExcelData] = useState(null);
+  const { quill, quillRef } = useQuill();
   const [formValues, setFormValues] = useState(initialValues);
   const navigate = useNavigate();
 
@@ -46,54 +46,46 @@ const Lome = () => {
     }
   };
 
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //   setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  // };
+  const handleChange = (e) => {
+    e.preventDefault();
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (excelFile !== null) {
-  //     const workbook = XLSX.read(excelFile, { type: "buffer" });
-  //     const worksheetName = workbook.SheetNames[0];
-  //     const worksheet = workbook.Sheets[worksheetName];
-  //     const data = XLSX.utils.sheet_to_json(worksheet).map((el) => el.email);
-  //     console.log(data);
-  //     setFormValues({ ...formValues, to: data });
-  //   } else {
-  //     alert("Something went wrong. Please try again!");
-  //   }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let data;
+    if (excelFile !== null) {
+      const workbook = XLSX.read(excelFile, { type: "buffer" });
+      const worksheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[worksheetName];
+      data = XLSX.utils.sheet_to_json(worksheet).map((el) => el.email);
+    } else {
+      alert("Something went wrong. Please try again!");
+    }
 
-  //   await fetch(`${API}/users/sendEmails`, {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       token: localStorage.getItem("token"),
-  //     },
-  //     body: JSON.stringify(formValues),
-  //   })
-  //     .then((data) => {
-  //       if (data.status === 500) {
-  //         throw new Error(data.statusText);
-  //       } else if (data.status === 400) {
-  //         throw new Error(data.statusText);
-  //       }
-  //       setFormValues(initialValues);
-  //       toast.success("Emails sent successfully to the recipients!");
-  //       navigate(-1);
-  //     })
-  //     .catch((err) => {
-  //       toast.warn("Something went wrong. Please try again later");
-  //     });
-  // };
-
-  const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
-    useFormik({
-      initialValues,
-      validationSchema: emailSenderSchema,
-      onSubmit: (values) => {},
-    });
+    await fetch(`${API}/emails/sendEmails`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ ...formValues, to: data }),
+    })
+      .then((data) => {
+        if (data.status === 500) {
+          throw new Error(data.statusText);
+        } else if (data.status === 400) {
+          throw new Error(data.statusText);
+        }
+        setFormValues(initialValues);
+        toast.success("Emails sent successfully to the recipients!");
+        navigate("/stats");
+      })
+      .catch(() => {
+        toast.warn("Something went wrong. Please try again later");
+      });
+  };
 
   return (
     <div>
@@ -109,9 +101,6 @@ const Lome = () => {
                 onChange={handleChange}
                 required
               />
-              {errors.from && touched ? (
-                <p className="error">{errors.from}</p>
-              ) : null}
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Add recepients file</Form.Label>
