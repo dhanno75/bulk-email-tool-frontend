@@ -11,7 +11,6 @@ import Signup from "./components/signup/Signup";
 import Statistics from "./components/statistics/Statistics";
 import ProtectedRoute from "./ProtectedRoutes";
 import About from "./components/about/About";
-import Lome from "./components/home/Lome";
 
 function App() {
   return (
@@ -24,18 +23,10 @@ function App() {
           path="/home"
           element={
             <ProtectedRoute>
-              <Lome />
-            </ProtectedRoute>
-          }
-        />
-        {/* <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
               <Home />
             </ProtectedRoute>
           }
-        /> */}
+        />
         <Route
           path="/stats"
           element={
