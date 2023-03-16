@@ -1,4 +1,4 @@
-There is a small(1 - 2 second) delay when first checking the graph.
+There is a small(1 - 2 second) delay when first displaying the graph.
 
 # Getting Started with Create React App
 
