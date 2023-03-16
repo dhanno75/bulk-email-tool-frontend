@@ -17,5 +17,22 @@
 }
 
 .stats-chart {
-  max-width: 100vw;
+  width: 85vw;
+}
+
+.stats-cont {
+  width: 950px;
+  height: 600px;
+}
+
+@media screen and (max-width: 1000px) {
+  .stats-cont {
+    width: 800px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .stats-heading {
+    font-size: 23px;
+  }
 }

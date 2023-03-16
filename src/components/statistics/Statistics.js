@@ -48,7 +48,7 @@ const Statistic = () => {
         <div className="stats-wrapper ">
           <h1 className="stats-heading">Your emails statistics</h1>
           <div className="stats-chart">
-            <ResponsiveContainer width={950} height={500}>
+            <ResponsiveContainer className="stats-cont">
               <AreaChart data={data}>
                 <Area
                   type="monotone"
