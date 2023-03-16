@@ -17,22 +17,11 @@
 }
 
 .stats-chart {
-  width: 85vw;
-}
-
-.stats-cont {
-  width: 950px;
-  height: 600px;
-}
-
-@media screen and (max-width: 1000px) {
-  .stats-cont {
-    width: 800px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .stats-heading {
-    font-size: 23px;
-  }
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  height: 400px;
+  /* background-color: #fff; */
 }
