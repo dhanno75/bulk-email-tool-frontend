@@ -1,13 +1,14 @@
 .signupPage {
-  max-width: 500px;
+  max-width: 550px;
   min-height: 85vh;
   font-family: "Poppins", sans-serif;
   display: flex;
+  padding: 40px;
 }
 
 .signupForm {
   width: 100%;
-  height: 80vh;
+  height: 100%;
   margin-top: auto;
   margin-bottom: auto;
   padding: 50px 40px;

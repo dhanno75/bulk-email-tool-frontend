@@ -11,6 +11,7 @@ import Signup from "./components/signup/Signup";
 import Statistics from "./components/statistics/Statistics";
 import ProtectedRoute from "./ProtectedRoutes";
 import About from "./components/about/About";
+import VerifiedViewPage from "./components/verifiedViewPage/VerifiedViewPage";
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
           }
         />
         <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/verification/:userId/:verificationToken"
+          element={<VerifiedViewPage />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/resetPassword/:token" element={<ResetPassword />} />

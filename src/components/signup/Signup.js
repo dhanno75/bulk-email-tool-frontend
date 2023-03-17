@@ -36,8 +36,10 @@ const Signup = () => {
               throw new Error(data.statusText);
             }
             action.resetForm();
-            navigate("/home");
-            toast.success("Successfull signup");
+            navigate("/");
+            toast.success(
+              "Please verify your email by clicking on the link sent to your email address."
+            );
             return data.json();
           })
           .catch((err) => {

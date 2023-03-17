@@ -29,7 +29,6 @@ const EmailSlice = createSlice({
       state.loading = true;
     },
     [emailData.fulfilled]: (state, action) => {
-      console.log(action.payload.data);
       state.loading = true;
       state.emails = action.payload.data;
     },
