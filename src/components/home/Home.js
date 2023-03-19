@@ -146,7 +146,7 @@ const Home = () => {
                 onChange={handleFile}
                 required
               />
-              <p className="mb-3 mt-1">
+              <p className="mb-4 mt-2 sample">
                 <a
                   href="https://drive.google.com/file/d/16OCarEK97dsCxttEhNnzo2SAwq0f6EbQ/view?usp=share_link"
                   target="_blank"
@@ -154,7 +154,7 @@ const Home = () => {
                 >
                   Sample Excel sheet
                 </a>
-                &nbsp;to upload
+                &nbsp;image for referrence
               </p>
               {excelFileError ? <div>{excelFileError}</div> : ""}
             </Form.Group>

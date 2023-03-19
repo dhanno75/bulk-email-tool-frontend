@@ -6,6 +6,10 @@
   margin: 0 auto;
 }
 
+form {
+  font-family: "Poppins", sans-serif;
+}
+
 .home-wrapper form {
   padding: 20px;
 }
@@ -17,4 +21,12 @@
 
 .editor {
   height: 300px;
+}
+
+.sample {
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  color: rgb(109, 112, 112);
+  word-spacing: 1px;
+  font-weight: 300;
 }
