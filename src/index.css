@@ -10,3 +10,8 @@ body {
   color: rgb(205, 130, 33);
   margin-bottom: 0;
 }
+
+.jodit-status-bar {
+  visibility: hidden;
+  display: none;
+}

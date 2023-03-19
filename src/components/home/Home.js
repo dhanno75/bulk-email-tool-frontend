@@ -1,12 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import JoditEditor from "jodit-react";
 import "./home.css";
 import * as XLSX from "xlsx";
 import { API } from "../../globals";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
+
+const config = {
+  buttons: [
+    "bold",
+    "italic",
+    "underline",
+    "strikethrough",
+    "eraser",
+    "|",
+    "ul",
+    "ol",
+    "|",
+    "font",
+    "fontsize",
+    "paragraph",
+    "classSpan",
+    "|",
+    "indent",
+    "outdent",
+    "left",
+    "|",
+    "file",
+    "image",
+    "video",
+    "|",
+    "link",
+    "unlink",
+    "source",
+    "|",
+    "undo",
+    "redo",
+  ],
+};
 
 const initialValues = {
   from: "",
@@ -18,8 +50,9 @@ const initialValues = {
 const Home = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
-  const { quill, quillRef } = useQuill();
   const [formValues, setFormValues] = useState(initialValues);
+  const editor = useRef(null);
+  const [value, setValue] = useState("");
   const navigate = useNavigate();
 
   const fileType = [
@@ -40,7 +73,6 @@ const Home = () => {
         setExcelFileError("Please select only excel file types");
         setExcelFile(null);
       }
-      console.log(selectedFile.type);
     } else {
       console.log("Please select your file");
     }
@@ -70,7 +102,11 @@ const Home = () => {
         "Content-Type": "application/json",
         token: localStorage.getItem("token"),
       },
-      body: JSON.stringify({ ...formValues, to: data }),
+      body: JSON.stringify({
+        ...formValues,
+        to: data,
+        message: value.replace(/<[^>]+>/g, ""),
+      }),
     })
       .then((data) => {
         if (data.status === 500) {
@@ -110,6 +146,16 @@ const Home = () => {
                 onChange={handleFile}
                 required
               />
+              <p className="mb-3 mt-1">
+                <a
+                  href="https://drive.google.com/file/d/16OCarEK97dsCxttEhNnzo2SAwq0f6EbQ/view?usp=share_link"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Sample Excel sheet
+                </a>
+                &nbsp;to upload
+              </p>
               {excelFileError ? <div>{excelFileError}</div> : ""}
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -123,12 +169,11 @@ const Home = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Message</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="message"
-                rows={6}
-                onChange={handleChange}
-                required
+              <JoditEditor
+                ref={editor}
+                onChange={(content) => setValue(content)}
+                config={config}
+                className="editor"
               />
             </Form.Group>
             <Button type="submit" variant="outline-primary">

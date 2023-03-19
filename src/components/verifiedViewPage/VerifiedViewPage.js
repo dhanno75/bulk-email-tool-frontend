@@ -49,10 +49,7 @@ const VerifiedViewPage = () => {
           user and makes your account more secure. It also helps the system work
           as it should, with the right email alerts going to the right users.
         </h4>
-        <h3>
-          {/* You can now log into <span>"The Bulk Email Tool"</span> */}
-          You will now be redirected to login page.
-        </h3>
+        <h3>You will now be redirected to login page.</h3>
       </Container>
     </div>
   );
