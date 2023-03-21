@@ -22,9 +22,12 @@ export const login = createAsyncThunk(
         return data;
       } else if (response.status === 401) {
         throw new Error("Invalid login credentials!");
+      } else if (response.status === 400) {
+        throw new Error("Please verify your email address");
       }
     } catch (err) {
-      rejectWithValue(err.response.data);
+      console.log(err);
+      return rejectWithValue(err);
     }
   }
 );
@@ -79,7 +82,7 @@ const UserSlice = createSlice({
       state.isSuccess = true;
       return state;
     },
-    [login.rejected]: (state, { payload }) => {
+    [login.rejected]: (state, action) => {
       state.isFetching = false;
       state.isError = true;
     },

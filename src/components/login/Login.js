@@ -38,7 +38,9 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.warn("Invalid login credentials");
+      toast.warn(
+        "Invalid login credentials Or you have not verified your email address"
+      );
       dispatch(clearSomeState());
     }
     if (isSuccess) {
