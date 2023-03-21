@@ -1,10 +1,11 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { API } from "../../globals";
 import { forgotPasswordSchema } from "../../schemas";
+import { LineLoader } from "../../utils/Loader";
 import "./forgotPassword.css";
 
 const initialValues = {
@@ -12,6 +13,7 @@ const initialValues = {
 };
 
 const ForgotPassword = () => {
+  const [buttonState, setButtonState] = useState(true);
   const navigate = useNavigate();
 
   const { values, handleBlur, handleSubmit, handleChange, errors, touched } =
@@ -19,6 +21,7 @@ const ForgotPassword = () => {
       initialValues,
       validationSchema: forgotPasswordSchema,
       onSubmit: (values) => {
+        setButtonState(false);
         fetch(`${API}/users/forgotPassword`, {
           method: "POST",
           body: JSON.stringify(values),
@@ -61,7 +64,9 @@ const ForgotPassword = () => {
             {errors.email && touched ? (
               <p className="error">{errors.email}</p>
             ) : null}
-            <button type="submit">Submit</button>
+            <button type="submit">
+              {buttonState ? "Submit" : <LineLoader />}
+            </button>
           </form>
         </div>
       </Container>

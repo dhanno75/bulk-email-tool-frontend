@@ -1,10 +1,11 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { API } from "../../globals";
 import { resetYourPassword } from "../../schemas";
+import { LineLoader } from "../../utils/Loader";
 import "./resetPassword.css";
 
 const initialValues = {
@@ -14,12 +15,14 @@ const initialValues = {
 const ResetPassword = () => {
   const navigate = useNavigate();
   const { token } = useParams();
+  const [buttonState, setButtonState] = useState(true);
 
   const { values, handleBlur, handleSubmit, handleChange, errors, touched } =
     useFormik({
       initialValues,
       validationSchema: resetYourPassword,
       onSubmit: (values) => {
+        setButtonState(false);
         fetch(`${API}/users/resetPassword/${token}`, {
           method: "PUT",
           body: JSON.stringify(values),
@@ -64,7 +67,9 @@ const ResetPassword = () => {
             {errors.password && touched ? (
               <p className="error">{errors.password}</p>
             ) : null}
-            <button type="submit">Submit</button>
+            <button type="submit">
+              {buttonState ? "Submit" : <LineLoader />}
+            </button>
           </form>
         </div>
       </Container>

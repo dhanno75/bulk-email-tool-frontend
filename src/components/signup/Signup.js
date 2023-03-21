@@ -1,11 +1,12 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { signUpSchema } from "../../schemas";
 import "./signup.css";
 import { useNavigate, Link } from "react-router-dom";
 import { API } from "../../globals";
+import { LineLoader } from "../../utils/Loader";
 
 const initialValues = {
   name: "",
@@ -16,6 +17,7 @@ const initialValues = {
 };
 
 const Signup = () => {
+  const [buttonState, setButtonState] = useState(true);
   const navigate = useNavigate();
 
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
@@ -23,6 +25,7 @@ const Signup = () => {
       initialValues,
       validationSchema: signUpSchema,
       onSubmit: (values, action) => {
+        setButtonState(false);
         fetch(`${API}/users/signup`, {
           method: "POST",
           body: JSON.stringify(values),
@@ -111,7 +114,9 @@ const Signup = () => {
           ) : null}
 
           <div className="signup-btn">
-            <button type="submit">Signup</button>
+            <button type="submit">
+              {buttonState ? "Signup" : <LineLoader />}
+            </button>
             <Link to="/forgotPassword" className="forgot">
               Forgot your password?
             </Link>

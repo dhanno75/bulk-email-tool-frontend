@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import { loginSchema } from "../../schemas";
 import { clearSomeState, login } from "../../redux/features/UserSlice";
 import "./login.css";
 import { useNavigate, Link } from "react-router-dom";
+import { LineLoader } from "../../utils/Loader";
 
 const initialValues = {
   email: "",
@@ -17,12 +18,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isSuccess, isError } = useSelector((state) => ({ ...state.user }));
+  const [buttonState, setButtonState] = useState(true);
 
   const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
     useFormik({
       initialValues,
       validationSchema: loginSchema,
       onSubmit: (values) => {
+        setButtonState(false);
         dispatch(login(values));
       },
     });
@@ -74,7 +77,9 @@ const Login = () => {
             <p className="error">{errors.password}</p>
           ) : null}
           <div className="login-btn">
-            <button type="submit">Login</button>
+            <button type="submit">
+              {buttonState ? "Login" : <LineLoader />}
+            </button>
             <Link to="/forgotPassword" className="forgot">
               Forgot your password?
             </Link>

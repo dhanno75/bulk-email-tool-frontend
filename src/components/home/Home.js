@@ -6,6 +6,7 @@ import * as XLSX from "xlsx";
 import { API } from "../../globals";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { LineLoader } from "../../utils/Loader";
 
 const config = {
   buttons: [
@@ -51,6 +52,7 @@ const Home = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
   const [formValues, setFormValues] = useState(initialValues);
+  const [buttonState, setButtonState] = useState(true);
   const editor = useRef(null);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
@@ -85,6 +87,7 @@ const Home = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setButtonState(false);
     let data;
     if (excelFile !== null) {
       const workbook = XLSX.read(excelFile, { type: "buffer" });
@@ -177,7 +180,7 @@ const Home = () => {
               />
             </Form.Group>
             <Button type="submit" variant="outline-primary">
-              Submit
+              {buttonState ? "Submit" : <LineLoader />}
             </Button>
           </Form>
         </div>
