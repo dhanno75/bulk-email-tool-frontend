@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./navigation.css";
-import { Container, Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
+import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Logo from "../../images/logo.png";
